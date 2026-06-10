@@ -15,7 +15,7 @@ async function run() {
     { email: 'admin@gmail.com' },
     {
       $set: {
-        full_name: 'System Admin',
+        full_name: 'admin',
         password: hash,
         role: 'admin',
         xp_points: 0,
@@ -26,7 +26,7 @@ async function run() {
     { upsert: true }
   );
 
-  console.log('Admin user created and others set to user');
+  console.log('Admin user created with name "admin" and others set to user');
   await mongoose.disconnect();
 }
 

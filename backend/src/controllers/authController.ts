@@ -34,11 +34,8 @@ export const register = async (req: AuthRequest, res: Response) => {
     // 2. Hash Password
     const passwordHash = await bcrypt.hash(password, 10);
 
-    // 3. Determine Role (First user or matching email domain gets Admin)
-    const userCount = await User.countDocuments({});
-    const isFirstUser = userCount === 0;
-    const isAdminDomain = email.endsWith('@lifesync.io');
-    const role = (isFirstUser || isAdminDomain) ? 'admin' : 'user';
+    // 3. Determine Role (Only admin@gmail.com gets admin role, others get user role)
+    const role = (email.toLowerCase() === 'admin@gmail.com') ? 'admin' : 'user';
 
     // 4. Create User
     const user = await User.create({

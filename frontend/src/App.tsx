@@ -52,10 +52,110 @@ const AppContent: React.FC = () => {
     localStorage.clear();
     setIsAuthenticated(false);
     setHasRedirectedAdmin(false);
+    setActiveTab('dashboard');
   };
 
   if (!isAuthenticated) {
     return <Auth onLoginSuccess={handleLoginSuccess} />;
+  }
+
+  // Calculate unread notification count early for both layouts
+  const unreadNotifsCount = notifications.filter(n => !n.read).length;
+
+  const handleBellClick = () => {
+    setShowNotifications(!showNotifications);
+    if (!showNotifications) {
+      markNotificationsRead();
+    }
+  };
+
+  // Dedicated separate page layout for the Admin
+  if (user.role === 'admin') {
+    return (
+      <div className="min-h-screen flex flex-col bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 transition-colors duration-300">
+        
+        {/* Admin Header toolbar */}
+        <header className="sticky top-0 bg-slate-50/70 dark:bg-slate-950/70 backdrop-blur-md z-30 px-6 py-4 flex justify-between items-center border-b border-slate-200/10">
+          <div className="flex items-center gap-3">
+            <ShieldAlert className="w-6 h-6 text-rose-500 animate-pulse" />
+            <h1 className="text-lg font-black tracking-tight m-0 text-slate-900 dark:text-white uppercase bg-gradient-to-r from-rose-500 via-indigo-500 to-purple-500 bg-clip-text text-transparent">
+              System Administration Panel
+            </h1>
+          </div>
+
+          <div className="flex items-center gap-4">
+            {/* Notifications Bell trigger */}
+            <div className="relative">
+              <button 
+                onClick={handleBellClick}
+                className="p-2 bg-slate-200/50 dark:bg-slate-800/60 rounded-xl text-slate-500 dark:text-slate-400 hover:text-indigo-500 transition-colors relative cursor-pointer"
+              >
+                <Bell className="w-5 h-5" />
+                {unreadNotifsCount > 0 && (
+                  <span className="absolute top-1 right-1 w-2 h-2 rounded-full bg-rose-500 animate-pulse" />
+                )}
+              </button>
+
+              {/* Notifications dropdown panel container */}
+              {showNotifications && (
+                <div className="absolute right-0 mt-3 w-80 glass-panel border border-slate-200/50 dark:border-slate-800/80 rounded-2xl p-4 shadow-2xl z-40 max-h-96 overflow-y-auto animate-scale-up">
+                  <div className="flex justify-between items-center mb-3">
+                    <span className="text-xs font-bold text-slate-800 dark:text-white uppercase tracking-wider">Alerts & Logs</span>
+                    <button 
+                      onClick={() => setShowNotifications(false)}
+                      className="text-[10px] text-indigo-400 hover:underline cursor-pointer"
+                    >
+                      Close
+                    </button>
+                  </div>
+                  <div className="space-y-2.5">
+                    {notifications.map(n => (
+                      <div key={n.id} className="p-2.5 bg-slate-100/60 dark:bg-slate-900/60 border border-slate-200/5 dark:border-white/5 rounded-xl text-[10px]">
+                        <div className="flex justify-between font-bold text-slate-700 dark:text-white">
+                          <span>{n.title}</span>
+                          <span className="text-[8px] text-slate-500">{new Date(n.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
+                        </div>
+                        <p className="text-slate-500 dark:text-slate-400 mt-1 leading-relaxed">{n.message}</p>
+                      </div>
+                    ))}
+                    {notifications.length === 0 && (
+                      <p className="text-xs text-slate-500 italic text-center py-6">No current alerts logged</p>
+                    )}
+                  </div>
+                </div>
+              )}
+            </div>
+
+            {/* Admin Profile Details */}
+            <div className="flex items-center gap-3 border-l border-slate-200/10 pl-4">
+              <img 
+                src={user.avatar} 
+                alt={user.name} 
+                className="w-8 h-8 rounded-full bg-slate-200/50"
+              />
+              <div className="hidden sm:block">
+                <span className="text-xs font-bold block">{user.name}</span>
+                <span className="text-[10px] text-rose-400 font-semibold uppercase tracking-wider">Administrator</span>
+              </div>
+            </div>
+
+            {/* Sign out */}
+            <button 
+              onClick={handleLogout}
+              className="flex items-center gap-2 px-3 py-1.5 rounded-xl text-xs font-bold text-rose-400 hover:bg-rose-500/10 border border-rose-500/20 transition-all cursor-pointer active:scale-95"
+            >
+              <LogOut className="w-4 h-4" /> <span className="hidden sm:inline">Sign Out</span>
+            </button>
+          </div>
+        </header>
+
+        {/* Main Admin View Content */}
+        <main className="flex-1 p-6 md:p-8 overflow-y-auto">
+          <AdminPanel />
+        </main>
+
+      </div>
+    );
   }
 
   const navItems = [
@@ -67,20 +167,7 @@ const AppContent: React.FC = () => {
     { id: 'profile', label: 'Profile Settings', icon: <User className="w-4 h-4" /> },
   ];
 
-  // If user is Admin, add Admin Panel to sidebar navigation
-  const visibleNavItems = user.role === 'admin' 
-    ? [...navItems, { id: 'admin', label: 'Admin Console', icon: <ShieldAlert className="w-4 h-4 text-rose-400" /> }]
-    : navItems;
-
-  const unreadNotifsCount = notifications.filter(n => !n.read).length;
-
-  const handleBellClick = () => {
-    setShowNotifications(!showNotifications);
-    if (!showNotifications) {
-      markNotificationsRead();
-    }
-  };
-
+  const visibleNavItems = navItems;
   const getPageTitle = () => {
     switch (activeTab) {
       case 'dashboard': return 'LifeSync Dashboard';
