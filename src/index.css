@@ -1,0 +1,141 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap');
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@layer base {
+  :root {
+    --font-outfit: 'Outfit', sans-serif;
+    font-family: var(--font-outfit);
+    
+    /* Primary brand palette */
+    --color-primary: 79 70 229; /* #4F46E5 - Indigo 600 */
+    --color-secondary: 124 58 237; /* #7C3AED - Violet 600 */
+    --color-success: 16 185 129; /* #10B981 - Emerald 500 */
+    --color-warning: 245 158 11; /* #F59E0B - Amber 500 */
+    --color-danger: 239 68 68; /* #EF4444 - Rose 500 */
+    
+    /* Light Mode backgrounds and typography */
+    --bg-base: 248 250 252; /* Slate 50 */
+    --bg-surface: 255 255 255;
+    --text-base: 15 23 42; /* Slate 900 */
+    --text-muted: 100 116 139; /* Slate 500 */
+    --border-color: 226 232 240; /* Slate 200 */
+    --glass-opacity: 0.7;
+    --glass-blur: 12px;
+  }
+
+  .dark {
+    /* Dark Mode backgrounds and typography */
+    --bg-base: 11 15 25; /* Sleek Deep Slate/Blue #0B0F19 */
+    --bg-surface: 17 24 39; /* Slate 900 */
+    --text-base: 248 250 252; /* Slate 50 */
+    --text-muted: 156 163 175; /* Gray 400 */
+    --border-color: 31 41 55; /* Slate 800 */
+    --glass-opacity: 0.45;
+    --glass-blur: 16px;
+  }
+
+  body {
+    background-color: rgb(var(--bg-base));
+    color: rgb(var(--text-base));
+    font-family: var(--font-outfit);
+    overflow-x: hidden;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+}
+
+/* Scrollbar Customization */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(var(--color-primary), 0.2);
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(var(--color-primary), 0.4);
+}
+
+/* Custom UI Components and Helpers */
+.glass-panel {
+  background-color: rgba(var(--bg-surface), var(--glass-opacity));
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid rgba(var(--border-color), 0.4);
+}
+
+.glass-card {
+  background-color: rgba(var(--bg-surface), var(--glass-opacity));
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid rgba(var(--border-color), 0.5);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.03);
+  transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.glass-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+  border-color: rgba(var(--color-primary), 0.3);
+}
+
+.dark .glass-card:hover {
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+  border-color: rgba(var(--color-secondary), 0.3);
+}
+
+/* Glowing Border Effect */
+.glow-primary {
+  position: relative;
+}
+.glow-primary::after {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  background: linear-gradient(135deg, rgb(var(--color-primary)), rgb(var(--color-secondary)));
+  z-index: -1;
+  border-radius: inherit;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.glow-primary:hover::after {
+  opacity: 0.15;
+}
+
+/* Custom Animations */
+@keyframes pulseGlow {
+  0%, 100% {
+    opacity: 0.4;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.6;
+    transform: scale(1.05);
+  }
+}
+
+.animate-pulse-glow {
+  animation: pulseGlow 4s infinite ease-in-out;
+}
+
+/* Pomodoro Visual Progress Bar Circle */
+.pomodoro-circle {
+  transition: stroke-dashoffset 1s linear;
+}
+
+/* Heatmap Grid Cell Styles */
+.heatmap-cell {
+  aspect-ratio: 1;
+  border-radius: 3px;
+  transition: all 0.2s ease;
+}
+
+.heatmap-cell:hover {
+  transform: scale(1.15);
+  z-index: 10;
+}
