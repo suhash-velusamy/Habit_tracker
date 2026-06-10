@@ -199,7 +199,7 @@ export const Dashboard: React.FC = () => {
       </div>
 
       {/* KPI Overview Grid */}
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {/* KPI 1 */}
         <div className="glass-card p-4 rounded-xl relative overflow-hidden flex flex-col justify-between h-28">
           <div className="flex justify-between items-start">
@@ -268,8 +268,9 @@ export const Dashboard: React.FC = () => {
             <h3 className="text-sm font-bold tracking-tight mb-4 flex items-center gap-1.5">
               <Activity className="w-4 h-4 text-indigo-500" /> Weekly Habit Completion Progress
             </h3>
-            <div className="h-44 w-full flex items-end justify-between px-2 pt-4 border-b border-l border-slate-200 dark:border-slate-800 relative">
-              {/* Grid Lines */}
+            <div className="w-full overflow-x-auto pb-2">
+              <div className="h-44 min-w-[300px] w-full flex items-end justify-between px-2 pt-4 border-b border-l border-slate-200 dark:border-slate-800 relative">
+                {/* Grid Lines */}
               <div className="absolute left-0 right-0 top-1/4 border-t border-slate-100 dark:border-slate-800/40 text-[9px] text-slate-400 pl-1">75%</div>
               <div className="absolute left-0 right-0 top-2/4 border-t border-slate-100 dark:border-slate-800/40 text-[9px] text-slate-400 pl-1">50%</div>
               <div className="absolute left-0 right-0 top-3/4 border-t border-slate-100 dark:border-slate-800/40 text-[9px] text-slate-400 pl-1">25%</div>
@@ -291,6 +292,7 @@ export const Dashboard: React.FC = () => {
                   <span className="text-[10px] text-slate-400 font-semibold">{d.day}</span>
                 </div>
               ))}
+              </div>
             </div>
           </div>
 

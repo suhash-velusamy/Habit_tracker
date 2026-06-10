@@ -1,73 +1,68 @@
-# React + TypeScript + Vite
+# LifeSync - Advanced Habit & Goal Tracker 🚀
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Welcome to **LifeSync**, a comprehensive, modern, and highly responsive web application designed to help you build better habits, track daily tasks, and achieve your long-term goals.
 
-Currently, two official plugins are available:
+## 🌟 Overview
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+LifeSync goes beyond simple checklists. It is a full-featured personal productivity dashboard with a beautiful glassmorphism UI, detailed analytics, and integrated self-management tools to keep you motivated and consistent.
 
-## React Compiler
+## ✨ Key Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- 📊 **Dynamic Dashboard**: View your weekly habit completion progress, quick actions, and active goals in one glance.
+- 🔄 **Habit Tracking**: Track daily habits with streaks, completion grids, and visual heatmaps.
+- 📝 **Task Management**: Organize tasks using List View, Kanban Boards, or a 14-day Calendar Scheduler.
+- 🎯 **Goal Setting**: Set short-term and long-term goals with step-by-step milestones and progress bars.
+- ⏱️ **Self-Management**: 
+  - **Pomodoro Timer**: Built-in focus timer with Web Audio API alerts.
+  - **Daily Journaling**: Log your mood, gratitude, and daily reflections.
+  - **Timeblocking**: Plan your day hour-by-hour.
+- 🌓 **Beautiful UI/UX**: Fully responsive design with an elegant dark/light mode toggle powered by Tailwind CSS v4.
 
-## Expanding the ESLint configuration
+## 🛠️ Tech Stack
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- **Frontend**: React, Vite, TypeScript, Tailwind CSS v4, Framer Motion, Lucide React.
+- **Backend**: Node.js, Express.js.
+- **Database**: MongoDB (Atlas) & Mongoose for seamless data persistence.
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## 🚀 Getting Started
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+### Prerequisites
+- Node.js installed
+- MongoDB URI (for the backend)
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+### Installation
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+1. **Clone the repository**
+2. **Install Frontend Dependencies:**
+   ```bash
+   cd frontend
+   npm install
+   ```
+3. **Install Backend Dependencies:**
+   ```bash
+   cd backend
+   npm install
+   ```
+4. **Environment Variables:**
+   Create a `.env` file in the `backend/` directory and add your MongoDB connection string:
+   ```env
+   PORT=5000
+   MONGODB_URI=your_mongodb_atlas_connection_string
+   ```
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### Running the App
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+1. **Start the Backend Server:**
+   ```bash
+   cd backend
+   npm run dev
+   ```
+2. **Start the Frontend Development Server:**
+   ```bash
+   cd frontend
+   npm run dev
+   ```
+3. Open your browser and navigate to `http://localhost:5173`.
+
+---
+*Built with ❤️ to help you stay productive and focused.*

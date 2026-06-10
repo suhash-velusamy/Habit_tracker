@@ -156,7 +156,7 @@ const AppContent: React.FC = () => {
       <div className="flex-1 flex flex-col min-w-0 relative">
         
         {/* Header toolbar */}
-        <header className="sticky top-0 bg-slate-50/70 dark:bg-slate-950/70 backdrop-blur-md z-30 px-6 py-4 flex justify-between items-center border-b border-slate-200/10">
+        <header className="sticky top-0 bg-slate-50/70 dark:bg-slate-950/70 backdrop-blur-md z-30 px-4 md:px-6 py-4 flex justify-between items-center border-b border-slate-200/10">
           <div className="flex items-center gap-3">
             {/* Hamburger trigger for mobile */}
             <button 
@@ -221,7 +221,7 @@ const AppContent: React.FC = () => {
         </header>
 
         {/* View content panel */}
-        <main className="flex-1 p-6 overflow-y-auto">
+        <main className="flex-1 p-4 md:p-6 lg:p-8 overflow-y-auto">
           {activeTab === 'dashboard' && <Dashboard />}
           {activeTab === 'habits' && <Habits />}
           {activeTab === 'self-management' && <SelfManagement />}

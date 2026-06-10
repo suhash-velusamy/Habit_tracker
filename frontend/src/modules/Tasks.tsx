@@ -303,8 +303,9 @@ export const Tasks: React.FC = () => {
         <h4 className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-4 text-center">
           Task Deadlines Scheduler (2 Weeks Overview)
         </h4>
-        <div className="grid grid-cols-7 gap-2">
-          {['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'].map(dayName => (
+        <div className="w-full overflow-x-auto pb-2">
+          <div className="grid grid-cols-7 gap-2 min-w-[550px]">
+            {['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'].map(dayName => (
             <div key={dayName} className="text-center font-bold text-xs text-slate-400 py-1.5">
               {dayName}
             </div>
@@ -338,6 +339,7 @@ export const Tasks: React.FC = () => {
               </div>
             );
           })}
+          </div>
         </div>
       </div>
     );
