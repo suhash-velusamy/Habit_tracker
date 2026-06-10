@@ -1,4 +1,4 @@
-const API_BASE = 'http://localhost:5000/api';
+const API_BASE = import.meta.env.PROD ? '/api' : 'http://localhost:5000/api';
 
 let token: string | null = typeof window !== 'undefined' ? localStorage.getItem('lifesync_token') : null;
 

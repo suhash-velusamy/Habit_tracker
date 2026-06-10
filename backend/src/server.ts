@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 import apiRouter from './routes/api';
 import { initializeDatabase } from './config/db';
 import { startCronJobs } from './services/cronService';
+import path from 'path';
 
 dotenv.config();
 
@@ -16,6 +17,15 @@ app.use(express.json());
 
 // API routing prefix
 app.use('/api', apiRouter);
+
+// Serve Frontend Static Files for Render Hosting
+const frontendPath = path.join(__dirname, '../../frontend/dist');
+app.use(express.static(frontendPath));
+
+// Catch-all to serve index.html for React Router
+app.use((req, res) => {
+  res.sendFile(path.join(frontendPath, 'index.html'));
+});
 
 // Initialize database, Cron jobs, and startup server
 const bootServer = async () => {
