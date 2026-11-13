@@ -66,3 +66,4 @@ LifeSync goes beyond simple checklists. It is a full-featured personal productiv
 
 ---
 *Built with ❤️ to help you stay productive and focused.*
+m

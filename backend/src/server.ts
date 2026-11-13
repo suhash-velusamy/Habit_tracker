@@ -6,6 +6,8 @@ import { initializeDatabase } from './config/db';
 import { startCronJobs } from './services/cronService';
 import path from 'path';
 
+dotenv.config({ path: path.resolve(__dirname, '../../.env') });
+dotenv.config({ path: path.resolve(__dirname, '../.env') });
 dotenv.config();
 
 const app = express();

@@ -8,7 +8,7 @@
     "dev": "nodemon src/server.ts",
     "build": "tsc",
     "reset-db": "ts-node src/config/resetDb.ts",
-    "clear-db": "node truncateDb.js"
+    "clear-db": "ts-node src/config/resetDb.ts"
   },
   "keywords": [],
   "author": "",
